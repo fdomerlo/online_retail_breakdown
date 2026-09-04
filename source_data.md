@@ -1,4 +1,32 @@
-Básicamente, identificar los orígenes de datos no es mágica: lo hacés combinando **lo que te dice el negocio**, **lo que te pide la materia** y **lo que te delatan las columnas raras del CSV**.
+```mermaid
+flowchart TD
+    subgraph S1["1. Sistemas de Origen"]
+        O1["🛒 Tienda Web<br>(Venta B2C / B2B)"]
+        O2["💳 Facturación<br>(Invoices y Notas de Crédito)"]
+        O3["📦 WMS / Depósito<br>(Inventario y Mermas)"]
+        O4["🚚 Logística<br>(Destinos de Envío)"]
+    end
+
+    subgraph S2["2. Integración y Fricción ⚠️"]
+        I1["ETL / Ingesta de Datos<br>• Compras anónimas (Sin Customer ID)<br>• Mermas cargadas a £0 (damaged/lost)<br>• Cancelaciones sin enlace a orden origen"]
+    end
+
+    subgraph S3["3. Almacenamiento"]
+        A1["Extracto Analítico Consolidado<br>(online_retail_II: 1.067.371 filas)"]
+    end
+
+    subgraph S4["4. Consumidores"]
+        C1["🎯 CRM: Retención de Clientes"]
+        C2["📊 Finanzas: Conciliación de Ventas"]
+        C3["📦 Compras: Reposición de Stock"]
+    end
+
+    O1 & O2 & O3 & O4 --> I1
+    I1 --> A1
+    A1 --> C1 & C2 & C3
+```
+
+Identificar los orígenes de datos no es mágica: lo hacés combinando **lo que te dice el negocio**, **lo que te pide la materia** y **lo que te delatan las columnas raras del CSV**.
 
 ---
 
