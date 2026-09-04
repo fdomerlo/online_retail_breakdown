@@ -79,3 +79,15 @@ Acá viene lo copado: cada columna es una pista que te dice qué sistema generó
 > "Básicamente, deducimos por ingeniería inversa. Sabemos que hay tienda web porque UCI lo dice y porque un 22% de transacciones sin `Customer ID` delata un checkout anónimo. Sabemos que hay sistema contable porque los invoices con 'C' son Credit Notes formales. Y sabemos que el almacén volcó datos directamente porque hay registros a $0 con descripciones de mermas (`damaged`, `adjust`) que solo un operario carga cuando falta o se rompe algo."
 
 ---
+
+## Resumen
+
+La fuente principal de información es el propio archivo analítico consolidado del dataset **`online_retail_II`** (1.067.371 filas), mediante **ingeniería inversa y análisis exploratorio de datos (EDA)** sobre sus columnas y anomalías:
+
+* **Dataset primario:** El archivo transaccional de ventas (*Online Retail II*, habitualmente alojado en el repositorio UCI Machine Learning Repository), que reúne las transacciones registradas entre 2009 y 2011.
+* **Evidencias en `Customer ID`:** Los 243.007 registros con valores nulos (`NaN`, 22,8% del dataset) fundamentan la existencia de compras anónimas o flujos de *Guest Checkout* en la tienda web.
+* **Evidencias en `Invoice` y `Price`:** Las 19.494 filas cuyo identificador comienza con la letra **'C'** y contienen cantidades negativas corresponden a notas de crédito generadas por el sistema de facturación.
+* **Evidencias en `Description` y `StockCode`:** Las entradas con `Price = 0.0` acompañadas de términos manuales como *damaged*, *lost*, *check* o *adjust* demuestran ajustes de mermas e inventario cargados directamente por el personal del depósito (WMS).
+* **Evidencias en `Country`:** Los destinos de entrega provienen de los campos de despacho y cálculo tarifario del operador logístico.
+
+La deducción no surge de una documentación externa de arquitectura, sino de la inspección directa de las variables y el comportamiento de las filas dentro del archivo.
