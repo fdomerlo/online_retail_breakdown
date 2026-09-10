@@ -26,10 +26,6 @@ flowchart TD
     A1 --> C1 & C2 & C3
 ```
 
-Identificar los orígenes de datos no es mágica: lo hacés combinando **lo que te dice el negocio**, **lo que te pide la materia** y **lo que te delatan las columnas raras del CSV**.
-
----
-
 **1. Primero: qué te dice UCI sobre el negocio**
 
 En el repositorio de UCI viene toda la info sobre de dónde salió el archivo `online_retail_II`:
